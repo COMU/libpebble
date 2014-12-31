@@ -11,4 +11,4 @@ Homepage: http://www.pebbleremote.com
 Package: pebble-remote
 Architecture: any
 Depends: python-dev, libopenobex1-dev, python-tk, python-lightblue, python-pexpect, xdotool, python-bluez
-Description: Remote control Libreoffice Impress with Pebble
+Description: Remote control Libreoffice Impress with Pebble 
