@@ -1,0 +1,6 @@
+pebble-remote-1.0/pebble-remote usr/bin/pebble-remote
+pebble-remote-1.0/p.py usr/bin/p.py
+pebble-remote-1.0/pebble/LightBluePebble.py usr/lib/python/pebble/LightBluePebble.py
+pebble-remote-1.0/pebble/__init__.py usr/lib/python/pebble/__init__.py
+pebble-remote-1.0/pebble/pebble.py usr/lib/python/pebble/pebble.py
+pebble-remote-1.0/pebble/stm32_crc.py usr/lib/python/pebble/stm32_crc.py

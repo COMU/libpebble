@@ -1,0 +1,14 @@
+Source: pebble-remote
+Section: utils
+Priority: optional
+Maintainer: gulsah <gulsah.1004@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 1.0
+Homepage: http://www.pebbleremote.com
+#Vcs-Git: git://git.debian.org/collab-maint/pebble-remote.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/pebble-remote.git;a=summary
+
+Package: pebble-remote
+Architecture: any
+Depends: python-dev, libopenobex1-dev, python-tk, python-lightblue, python-pexpect, xdotool, python-bluez
+Description: Remote control Libreoffice Impress with Pebble

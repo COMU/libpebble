@@ -1,0 +1,10 @@
+Package: pebble-remote
+Version: 1.0-1
+Architecture: amd64
+Maintainer: gulsah <gulsah.1004@gmail.com>
+Installed-Size: 26
+Depends: python-dev, libopenobex1-dev, python-tk, python-lightblue, python-pexpect, xdotool, python-bluez
+Section: utils
+Priority: optional
+Homepage: http://www.pebbleremote.com
+Description: Remote control Libreoffice Impress with Pebble
