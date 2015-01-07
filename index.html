@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Pebble-remote : Remote control on LibreOffice Impress with Pebble">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Pebble-remote</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/COMU/pebble-remote">View on GitHub</a>
+
+          <h1 id="project_title">Pebble-remote</h1>
+          <h2 id="project_tagline">Remote control on LibreOffice Impress with Pebble</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/COMU/pebble-remote/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/COMU/pebble-remote/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="pebble-remote" class="anchor" href="#pebble-remote" aria-hidden="true"><span class="octicon octicon-link"></span></a>pebble-remote</h1>
+
+<p>This project provides remote control to Libreoffice Impress with Pebble. The directives are all for Ubuntu 14.04, but should be easily adaptable to other platforms. </p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ul>
+<li>
+<p>To install lightblue clone <code>lightblue-0.4</code> from <code>https://github.com/pebble/lightblue-0.4</code> and then:</p>
+
+<ul>
+<li><code>cd lightblue-0.4</code></li>
+<li><code>sudo python setup.py install</code></li>
+</ul>
+</li>
+<li>
+<p>Install pebble-remote-1.1.deb package's dependencies.</p>
+
+<ul>
+<li><code>sudo apt-get install python-dev libopenobex1-dev python-tk python-lightblue python-pexpect xdotool python-bluez</code></li>
+</ul>
+</li>
+<li>
+<p>Download debian package from this address[1] and then</p>
+
+<ul>
+<li><code>sudo dpkg -i pebble-remote-1.1.deb</code></li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<ul>
+<li><p>Disconnect between the pebble by phone.</p></li>
+<li><p>Pair pebble and with your computer on bluetooth.</p></li>
+<li>
+<p>Run this command:</p>
+
+<ul>
+<li><code>pebble-remote /full/path/to/file_name.odp</code></li>
+</ul>
+</li>
+<li><p>Open music app on your pebble. You can remote presentation by using up and down buttons on Pebble.</p></li>
+</ul>
+
+<h2>
+<a id="pictures" class="anchor" href="#pictures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pictures</h2>
+
+<p><img src="https://github.com/COMU/pebble-remote/blob/master/pictures/Screenshot%202015-01-02%20at%2001.33.35.png" alt="1"></p>
+
+<hr>
+
+<p>[1] <a href="http://tinyurl.com/pebble-remote-1-1">http://tinyurl.com/pebble-remote-1-1</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Pebble-remote maintained by <a href="https://github.com/COMU">COMU</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
