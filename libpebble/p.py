@@ -17,7 +17,7 @@ def cmd_remote(pebble, args):
     pebble.set_nowplaying_metadata(_("LibreOffice Remote Control "), _("Next"), _("Previous"))
 
     try:
-        pexpect.run(runodp, timeout=5)
+        pexpect.run(runodp)
         window_id = pexpect.run("xdotool search --sync --onlyvisible --class \"libreoffice\"")
 	fullscreen = "xdotool key --window " +window_id+" F5"
 	pexpect.run(fullscreen) 
@@ -28,6 +28,7 @@ def cmd_remote(pebble, args):
     def libreoffice_event_handler(event):
         right_click = "xdotool key --window "+ window_id + "Right"
         left_click = "xdotool key --window "+ window_id + "Left"
+        exit_click= "bash /usr/lib/python2.7/pebble/exit_click"
 
         if event == "next":
             pexpect.run(right_click)
@@ -35,9 +36,12 @@ def cmd_remote(pebble, args):
         if event == "previous":
             pexpect.run(left_click)
 
+	if event == "exit": 
+	    pexpect.run(exit_click)
+
     def music_control_handler(endpoint, resp):
         events = {
-            "PLAYPAUSE": "playpause",
+            "PLAYPAUSE": "exit",
             "PREVIOUS": "previous",
             "NEXT": "next"
         }
