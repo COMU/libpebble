@@ -6,12 +6,13 @@ import pebble as libpebble
 import time
 import pexpect
 import i18n
+import platform
 
 _ = i18n.language.gettext
 
 MAX_ATTEMPTS = 5
 
-def cmd_remote(pebble, args):
+def cmd_remote_linux(pebble, args):
     path=args.odp_file_path
     runodp = args.app_name+" --impress "+path
     pebble.set_nowplaying_metadata(_("LibreOffice Remote Control "), _("Next"), _("Previous"))
@@ -56,6 +57,56 @@ def cmd_remote(pebble, args):
         except KeyboardInterrupt:
             return
 
+
+def cmd_remote_darwin(pebble, args):
+    path=args.odp_file_path
+    runodp = args.app_name+" --impress "+path
+    pebble.set_nowplaying_metadata(_("LibreOffice Remote Control "), _("Next"), _("Previous"))
+
+    try:
+        pexpect.run(runodp)
+        window_id = pexpect.run("xdotool search --sync --onlyvisible --class \"libreoffice\"")
+        fullscreen = "xdotool key --window " +window_id+" F5"
+        pexpect.run(fullscreen)
+    except Exception:
+        print _("Something's wrong")
+        return False
+
+    def libreoffice_event_handler(event):
+        right_click = "xdotool key --window "+ window_id + "Right"
+        left_click = "xdotool key --window "+ window_id + "Left"
+        exit_click= "bash /usr/lib/python2.7/pebble/exit_click"
+
+        if event == "next":
+            pexpect.run(right_click)
+
+        if event == "previous":
+            pexpect.run(left_click)
+
+        if event == "exit":
+            pexpect.run(exit_click)
+
+    def music_control_handler(endpoint, resp):
+        events = {
+            "PLAYPAUSE": "exit",
+            "PREVIOUS": "previous",
+            "NEXT": "next"
+        }
+
+        libreoffice_event_handler(events[resp])
+
+    print _("waiting for events")
+    while True:
+        try:
+            pebble.register_endpoint("MUSIC_CONTROL", music_control_handler)
+            time.sleep(5)
+        except KeyboardInterrupt:
+            return
+
+
+
+
+
 def main():
     parser = argparse.ArgumentParser(description='a utility belt for pebble development')
     parser.add_argument('--pebble_id', type=str, help='the last 4 digits of the target Pebble\'s MAC address. \nNOTE: if \
@@ -70,7 +121,10 @@ def main():
     remote_parser = subparsers.add_parser('remote', help='control LibreOffice Impress app with music app on Pebble')
     remote_parser.add_argument('app_name', type=str, help='title of application to be controlled')
     remote_parser.add_argument('odp_file_path', type=str, help='path for libreoffice impress presentation file')
-    remote_parser.set_defaults(func=cmd_remote)
+    if platform.system() == 'Linux':
+        remote_parser.set_defaults(func=cmd_remote_linux)
+    else:
+        remote_parser.set_defaults(func=cmd_remote_darwin)
 
 
     args = parser.parse_args()

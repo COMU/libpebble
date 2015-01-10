@@ -3,6 +3,7 @@
 import os, sys
 import locale
 import gettext
+import platform
  
 # Change this variable to your app name!
 #  The translation files will be under
@@ -20,10 +21,14 @@ LOCALE_DIR = os.path.join(APP_DIR, 'i18n') # .mo files will then be located in A
 #  (on desktop is usually LANGUAGES)
 DEFAULT_LANGUAGES = os.environ.get('LANG', '').split('.')
 DEFAULT_LANGUAGES += ['en_US']
- 
-lc, encoding = locale.getdefaultlocale()
-if lc:
-    languages = [lc]
+
+if platform.system() == 'Linux':
+    lc, encoding = locale.getdefaultlocale()
+    if lc:
+        languages = [lc]
+else:
+    lc ='en'
+    encoding = 'UTF-8'
  
 # Concat all languages (env + default locale),
 #  and here we have the languages and location of the translations
