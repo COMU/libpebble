@@ -18,7 +18,7 @@
 [Desktop Entry]
 Version=1.0
 Terminal=false
-Icon=libreoffice-impress
+Icon=/usr/share/pixmaps/pebble-remote.png
 Type=Application
 Categories=Office;Presentation;X-Red-Hat-Base;X-MandrivaLinux-Office-Presentations;
 Exec=pebble-remote %U
