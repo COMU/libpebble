@@ -13,26 +13,35 @@ _ = i18n.language.gettext
 MAX_ATTEMPTS = 5
 
 def cmd_remote_linux(pebble, args):
+
+    # odp file's path
     path=args.odp_file_path
+
+    # Command for start libreoffice impress
     runodp = args.app_name+" --impress "+path
+
+    # Sets text on pebble smart watch's music app
     pebble.set_nowplaying_metadata(_("LibreOffice Remote Control "), _("Next"), _("Previous"))
 
     try:
+        # Starts libreffice impress.
         pexpect.run(runodp)
+
+        # Gets window id for send keystrokes
         window_id = pexpect.run("xdotool search --sync --onlyvisible --class \"libreoffice\"")
+        
+        # Sends f5 keystroke to libreoffice impress for view fullscreen
 	fullscreen = "xdotool key --window " +window_id+" F5"
 	pexpect.run(fullscreen) 
-    except Exception:
+    except Exception as e:
         print _("Something's wrong")
+        raise e
         return False
 
     def libreoffice_event_handler(event):
         right_click = "xdotool key --window "+ window_id + "Right"
         left_click = "xdotool key --window "+ window_id + "Left"
         exit_click = "bash /usr/lib/python2.7/pebble/exit_click"
-        window_ids = pexpect.run("xdotool search --sync --onlyvisible --name \"libreoffice\"").split("\r\n") 
-        altf4_presentation = "xdotool windowactivate --sync "+window_ids[-2]+" key --clearmodifiers --delay 100 alt+F4"
-        altf4_edit = "xdotool windowactivate --sync "+window_ids[-3]+" key --clearmodifiers --delay 100 alt+F4"
 
         if event == "next":
             pexpect.run(right_click)
@@ -41,9 +50,19 @@ def cmd_remote_linux(pebble, args):
             pexpect.run(left_click)
 
 	if event == "exit":
-	    try:
-	        pexpect.run(altf4_presentation)
-	        pexpect.run(altf4_edit)
+            try:
+                window_ids = pexpect.run("xdotool search --sync --onlyvisible --name \"libreoffice\"").split("\r\n")
+                window_ids.pop()
+                window_ids.reverse()
+                if len(window_ids)>=2:
+                    window_ids[0:2]
+                    altf4_presentation = "xdotool windowactivate --sync "+window_ids[0]+" key --clearmodifiers --delay 100 alt+F4"
+                    altf4_edit = "xdotool windowactivate --sync "+window_ids[1]+" key --clearmodifiers --delay 100 alt+F4"
+	            pexpect.run(altf4_presentation)
+	            pexpect.run(altf4_edit)
+                if len(window_ids)<2:
+                    altf4_edit = "xdotool windowactivate --sync "+window_ids[0]+" key --clearmodifiers --delay 100 alt+F4"
+	            pexpect.run(altf4_edit)
 	        pexpect.run(exit_click)
             except Exception as e:
                 raise e
