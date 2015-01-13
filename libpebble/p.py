@@ -41,7 +41,7 @@ def cmd_remote_linux(pebble, args):
         
         # Sends f5 keystroke to libreoffice impress for view fullscreen
 	fullscreen = "xdotool key --window " +window_id+" F5"
-	pexpect.run(fullscreen) 
+	pexpect.run(fullscreen)
     except Exception as e:
         print _("Something's wrong")
         raise e
@@ -197,8 +197,7 @@ def main():
             pebble = libpebble.Pebble(pebble_id, args.lightblue, args.pair)
             break
 	except LightBluePebbleError as e:
-            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
-            tkMessageBox.showerror(title="Error", message="Be sure to disconnect bluetooth between your watch and your phone. Please try agan.", parent=window)
+            tkMessageBox.showerror(title="Error", message=_("Bluetooth connection error"), parent=window)
             raise KeyboardInterrupt
 	except PebbleError as e:
             tkMessageBox.showerror(title="Error", message=e._message, parent=window)
