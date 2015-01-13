@@ -7,10 +7,19 @@ import time
 import pexpect
 import i18n
 import platform
+import tkMessageBox
+
+from Tkinter import *
 
 _ = i18n.language.gettext
 
+window = Tk()
+window.wm_withdraw()
+window.geometry("1x1+200+200") #remember its .geometry("WidthxHeight(+or-)X(+or-)Y")
+
 MAX_ATTEMPTS = 5
+LightBluePebbleError = libpebble.LightBluePebble.LightBluePebbleError
+PebbleError = libpebble.pebble.PebbleError
 
 def cmd_remote_linux(pebble, args):
 
@@ -82,6 +91,14 @@ def cmd_remote_linux(pebble, args):
         try:
             pebble.register_endpoint("MUSIC_CONTROL", music_control_handler)
             time.sleep(5)
+        except LightBluePebbleError as e:
+            print "Not discovered 7"
+            raise e
+            raise KeyboardInterrupt
+        except PebbleError as p:
+            print "Not discovered 8"
+            raise p
+            raise KeyboardInterrupt
         except KeyboardInterrupt:
             return
 
@@ -128,6 +145,14 @@ def cmd_remote_darwin(pebble, args):
         try:
             pebble.register_endpoint("MUSIC_CONTROL", music_control_handler)
             time.sleep(5)
+        except LightBluePebbleError as e:
+            print "Not discovered 0"
+            raise e
+            raise KeyboardInterrupt
+        except PebbleError as e:
+            print "Not discovered 1"
+            raise e
+            raise KeyboardInterrupt
         except KeyboardInterrupt:
             return
 
@@ -167,12 +192,27 @@ def main():
                 pebble_id = os.environ["PEBBLE_ID"]
             pebble = libpebble.Pebble(pebble_id, args.lightblue, args.pair)
             break
+	except LightBluePebbleError as e:
+            tkMessageBox.showerror(title="Error", message="Connection fault. Be sure to disconnect bluetooth between your watch and your phone. Please try agan.", parent=window)
+            raise KeyboardInterrupt
+	except PebbleError as e:
+            print "Not discovered 3"    
+            raise e
+            raise KeyboardInterrupt
         except:
             time.sleep(5)
             attempts += 1
 
     try:
         args.func(pebble, args)
+    except LightBluePebbleError as e:
+        print "Not discovered 4"    
+        raise e
+        raise KeyboardInterrupt
+    except PebbleError as e:
+        print "Not discovered 5"    
+        raise e
+        raise KeyboardInterrupt
     except Exception as e:
         pebble.disconnect()
         raise e
