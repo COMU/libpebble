@@ -92,12 +92,14 @@ def cmd_remote_linux(pebble, args):
             pebble.register_endpoint("MUSIC_CONTROL", music_control_handler)
             time.sleep(5)
         except LightBluePebbleError as e:
+            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
             print "Not discovered 7"
             raise e
             raise KeyboardInterrupt
-        except PebbleError as p:
+        except PebbleError as e:
+            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
             print "Not discovered 8"
-            raise p
+            raise e
             raise KeyboardInterrupt
         except KeyboardInterrupt:
             return
@@ -146,10 +148,12 @@ def cmd_remote_darwin(pebble, args):
             pebble.register_endpoint("MUSIC_CONTROL", music_control_handler)
             time.sleep(5)
         except LightBluePebbleError as e:
+            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
             print "Not discovered 0"
             raise e
             raise KeyboardInterrupt
         except PebbleError as e:
+            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
             print "Not discovered 1"
             raise e
             raise KeyboardInterrupt
@@ -193,9 +197,11 @@ def main():
             pebble = libpebble.Pebble(pebble_id, args.lightblue, args.pair)
             break
 	except LightBluePebbleError as e:
-            tkMessageBox.showerror(title="Error", message="Connection fault. Be sure to disconnect bluetooth between your watch and your phone. Please try agan.", parent=window)
+            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
+            tkMessageBox.showerror(title="Error", message="Be sure to disconnect bluetooth between your watch and your phone. Please try agan.", parent=window)
             raise KeyboardInterrupt
 	except PebbleError as e:
+            tkMessageBox.showerror(title="Error", message=e._message, parent=window)
             print "Not discovered 3"    
             raise e
             raise KeyboardInterrupt
@@ -206,10 +212,12 @@ def main():
     try:
         args.func(pebble, args)
     except LightBluePebbleError as e:
+        tkMessageBox.showerror(title="Error", message=e._message, parent=window)
         print "Not discovered 4"    
         raise e
         raise KeyboardInterrupt
     except PebbleError as e:
+        tkMessageBox.showerror(title="Error", message=e._message, parent=window)
         print "Not discovered 5"    
         raise e
         raise KeyboardInterrupt
