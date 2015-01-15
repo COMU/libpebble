@@ -29,4 +29,5 @@ setup(name='pebble',
           ('/usr/share/menu', ['pebble/data/mimetype/pebble-remote']),
           ('/usr/share/pixmaps', ['pebble/data/mimetype/pebble-remote.png'])
       ],
+      install_requires = ['setuptools'],
       zip_safe=False)
