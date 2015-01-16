@@ -13,12 +13,13 @@ This project provides remote control to Libreoffice Impress with Pebble. The dir
     * `cd lightblue-0.4`
     * `sudo python setup.py install`
 
-There are 3 ways to install the package
+There are 3 ways to install pebble-remote
 
 * Download debian package from this address[1] and then
 
     * `sudo dpkg -i pebble-remote-2.0.deb`
-* OR
+
+OR
 
 * Download this project version 2.0 from link[2]
 
@@ -26,7 +27,7 @@ There are 3 ways to install the package
     * `cd pebble-remote-2.0/libpebble`
     * `sudo python setup.py install
 
-* OR
+OR
 
 * Run this command:
 
@@ -34,7 +35,7 @@ There are 3 ways to install the package
 
 ## Usage
 
-* Disconnect between the pebble by phone.
+* Disconnect pebble from your phone.
 
 * Pair pebble and with your computer on bluetooth.
 
@@ -47,7 +48,7 @@ There are 3 ways to install the package
     * Open with
     * Select Pebble Remote:
 
-* Open music app on your pebble. You can remote presentation by using up and down buttons on Pebble. Use middle button of Pebble for exit presentation. 
+* Open music app on your pebble. You can control presentation by using up and down buttons on Pebble. Use middle button of Pebble to close presentation. 
 
 ## Pictures
 
