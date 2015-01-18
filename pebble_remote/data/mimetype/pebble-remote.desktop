@@ -16,7 +16,7 @@
 #   the License at http://www.apache.org/licenses/LICENSE-2.0 .
 #
 [Desktop Entry]
-Version=1.0
+Version=2.0
 Terminal=false
 Icon=/usr/share/pixmaps/pebble-remote.png
 Type=Application
