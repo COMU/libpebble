@@ -2,7 +2,7 @@
 
 import argparse
 import os
-import pebble as libpebble
+import libpebble
 import time
 import pexpect
 import tkMessageBox
@@ -38,6 +38,7 @@ def cmd_remote(pebble, args):
 	pexpect.run(fullscreen) 
     except Exception:
         print _("Something's wrong")
+        raise
         return False
 
     def libreoffice_event_handler(event):
