@@ -11,6 +11,22 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <title>Pebble-remote</title>
+
+    <script type="text/javascript">
+      function blink() {
+        var blinks = document.getElementsByTagName('blink');
+        for (var i = blinks.length - 1; i >= 0; i--) {
+          var s = blinks[i];
+          s.style.visibility = (s.style.visibility === 'visible') ? 'hidden' : 'visible';
+        }
+        window.setTimeout(blink, 1000);
+      }
+      if (document.addEventListener) document.addEventListener("DOMContentLoaded", blink, false);
+      else if (window.addEventListener) window.addEventListener("load", blink, false);
+      else if (window.attachEvent) window.attachEvent("onload", blink);
+      else window.onload = blink;
+    </script>
+
   </head>
 
   <body>
@@ -28,6 +44,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
+
+<blink>Now Pebble Remote is running on Pebble Time.</blink>
+</br></br>
 
 <p>
   <img src="images/pebble-screenshot_2015-01-07_07-37-09.png">
